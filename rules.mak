@@ -21,6 +21,6 @@ tests/%.test.run: tests/%.test .build/$(backend)/$(main_file_name)-kompiled/comp
 	kx -d $(build_dir) $<
 
 # spec rules depend on the haskell backend by default
-specs/%.spec: backend = haskell
-specs/%.spec: $(build_target)
-	kprove -d .build -m $(def_module) $@
+specs/%.spec.run: backend = haskell
+specs/%.spec.run: specs/%.spec $(build_target)
+	kprove -d $(build_dir) -m $(def_module) $<
