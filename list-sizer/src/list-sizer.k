@@ -1,6 +1,7 @@
 module LIST-SIZER-SYNTAX
   imports INT-SYNTAX
-  syntax MyList ::= List{Int, ""}
+  syntax MyList ::= ".MyList"
+                  | Int MyList
 endmodule
 
 module LIST-SIZER
@@ -8,16 +9,11 @@ module LIST-SIZER
   imports INT
   imports LIST
 
-  syntax List ::= toList(MyList) [function, functional]
-  // --------------------------------------------------
-  rule toList(I L:MyList) => ListItem(I) toList(L)
-  rule toList(   .MyList) => .List
-
-  configuration <k> toList($PGM:MyList) </k>
+  configuration <k> $PGM:MyList </k>
                 <size> 0 </size>
 
-  rule <k> .List => .K </k>
+  rule <k> .MyList => .K </k>
 
-  rule <k> ListItem(_E) L:List => L:List </k>
+  rule <k> _E L:MyList => L </k>
        <size> N => N +Int 1 </size>
 endmodule
