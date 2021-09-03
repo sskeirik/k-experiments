@@ -14,8 +14,8 @@ module LANG-SYNTAX
   syntax DataList ::= Data
                     | Data DataList
 
-  syntax Type ::= "(" Type ")" [bracket]
-  syntax Data ::= "(" Data ")" [bracket]
+  syntax Type ::= "(" Type ")"
+  syntax Data ::= "(" Data ")"
 
   syntax Input ::= Type Data
 endmodule
